@@ -25,8 +25,9 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductEntity>> getProducts() {
         var products = productRepository.findAll();
-        return ResponseEntity.ok().body(productRepository.findAll());
-
+        return products.isEmpty() ?
+                ResponseEntity.notFound().build() :
+                ResponseEntity.ok(products);
     }
 
 
@@ -43,6 +44,27 @@ public class ProductController {
         return productService.getProductByName(name)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/price/{price}")
+    public ResponseEntity<List<ProductEntity>> getProductsByUnitPriceLessThan(@PathVariable("price") Double price) {
+        List<ProductEntity> products = productService.findByUnitPriceLessThan(price);
+
+        return products.isEmpty() ?
+                ResponseEntity.notFound().build() :
+                ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/description/{keyword}")
+    public ResponseEntity<List<ProductEntity>> getProductsByDescriptionContaining
+                                        (@PathVariable("keyword") String keyword) {
+        // Busca productos que contengan la palabra clave en la descripción
+        // http://server:port/api/products/description/RAM
+        List<ProductEntity> products = productService.getProductsByDescriptionContaining(keyword);
+
+        return products.isEmpty() ?
+                ResponseEntity.notFound().build() :
+                ResponseEntity.ok(products);
     }
 
 

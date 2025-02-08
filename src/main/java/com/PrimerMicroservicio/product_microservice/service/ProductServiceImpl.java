@@ -5,6 +5,7 @@ import com.PrimerMicroservicio.product_microservice.repository.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,12 +24,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductEntity> getProductsByPrice(Double price) {
-        return null;
+    public List<ProductEntity> findByUnitPriceLessThan(Double price) {
+        if (price == null) {
+            return Collections.emptyList(); // Devuelve una lista vacía en lugar de null
+        }
+        return productRepository.findByUnitPriceLessThan(price);
     }
 
     @Override
-    public List<ProductEntity> getProductsByDescription(String keyword) {
-        return null;
+    public List<ProductEntity> getProductsByDescriptionContaining(String keyword) {
+        if (keyword == null) {
+            return Collections.emptyList(); // Devuelve una lista vacía en lugar de null
+        }
+        return productRepository.findByProductDescriptionContaining(keyword);
     }
 }
