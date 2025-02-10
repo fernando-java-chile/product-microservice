@@ -12,6 +12,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://192.168.100.5:4200")
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -85,5 +86,16 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable("id") String id) {
+        if (!productRepository.existsById(id)) {
+            return ResponseEntity.notFound().build(); // 🔹 Devuelve 404 si el producto no existe
+        }
+
+        productRepository.deleteById(id);
+        return ResponseEntity.noContent().build(); // 🔹 204 si la eliminación fue exitosa
+    }
+
 }
 
