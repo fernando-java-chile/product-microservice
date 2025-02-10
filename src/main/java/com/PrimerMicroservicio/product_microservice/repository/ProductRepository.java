@@ -18,5 +18,7 @@ public interface ProductRepository extends MongoRepository<ProductEntity, String
     // Buscar productos que contengan cierta palabra en la descripción
     List<ProductEntity> findByProductDescriptionContaining(String keyword);
 
+
+
 }
 

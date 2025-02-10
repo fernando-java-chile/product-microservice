@@ -10,12 +10,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://192.168.100.5:4200")
 @RestController
-@RequestMapping("/api/products")
-public class ProductController {
+@RequestMapping("/v1/products")
+public class ProductControllerV1 {
     @Autowired
     ProductRepository productRepository;
 
