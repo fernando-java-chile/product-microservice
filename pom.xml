@@ -63,7 +63,8 @@
 		<dependency> <!-- AGREGAR ESTO PARA Spring Eureka -->
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency> <!-- HASTA AQUÍ -->
+		</dependency>
+		<!-- HASTA AQUÍ -->
 	</dependencies>
 
 	<build>
